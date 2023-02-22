@@ -1,0 +1,53 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: vaultsyncstatus.stable.example.com
+spec:
+  group: stable.example.com
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              x-kubernetes-preserve-unknown-fields: true
+              properties:
+                deployName:
+                  type: string
+                deployNamespace:
+                  type: string
+                secretEngine:
+                  type: string
+                secretPath:
+                  type: string
+            status:
+              type: object
+              x-kubernetes-preserve-unknown-fields: true
+      additionalPrinterColumns:
+      - name: Deployment_Name
+        type: string
+        jsonPath: .spec.deployName
+      - name: Deployment_Namespace
+        type: string
+        jsonPath: .spec.deployNamespace
+      - name: Secret_Engine
+        type: string
+        jsonPath: .spec.secretEngine
+      - name: Secret_Path
+        type: string
+        jsonPath: .spec.secretPath
+      - name: Sync_Status
+        type: string
+        jsonPath: .status.vault_sync.SyncStatus
+  scope: Namespaced
+  names:
+    plural: vaultsyncstatus
+    singular: vaultsyncstatus
+    kind: VaultSyncStatus
+    shortNames:
+      - vss
+

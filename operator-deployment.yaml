@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vault-operator
+  labels:
+    version: "1.0"
+    app.kubernetes.io/name: vault-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: vault-operator
+  template:
+    metadata:
+      labels:
+        name: vault-operator
+    spec:
+      volumes:
+      - name: config-volume
+        configMap:
+          name: vault-token-config
+      serviceAccountName: vault-operator-sa
+      containers:
+        - name: vault-operator
+          image: aa047267/operator:latest
+          imagePullPolicy: Always
+          env:
+            - name: VAULT_URL
+              value: 'http://35.93.40.126:8200/v1/'
+          volumeMounts:
+          - name: config-volume
+            mountPath: /etc/config
+      

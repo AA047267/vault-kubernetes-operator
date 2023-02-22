@@ -1,0 +1,11 @@
+apiVersion: stable.example.com/v1
+kind: VaultSyncStatus
+metadata:
+  name: <name>
+  namespace: <name_of_namespace_to_deploy_this_resource>
+spec:
+  deployName: <target_deploymnet_name>
+  deployNamespace: <target_deploymnet_name_namespace>
+  secretEngine: <Hashicopr_Vault_Engine_Name>
+  secretPath: <Secret_Path_Name>
+  timeStamp: '0000-00-00T00:00:00.000000000Z'
