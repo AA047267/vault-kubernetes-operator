@@ -24,6 +24,8 @@ spec:
                   type: string
                 secretPath:
                   type: string
+                timeStamp:
+                  type: string
             status:
               type: object
               x-kubernetes-preserve-unknown-fields: true
