@@ -26,7 +26,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: VAULT_URL
-              value: 'http://35.93.40.126:8200/v1/'
+              value: 'https://<VAULT_URL>/v1/'
           volumeMounts:
           - name: config-volume
             mountPath: /etc/config
